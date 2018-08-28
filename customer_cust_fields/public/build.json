@@ -1,0 +1,5 @@
+{
+    "js/customer.min.js": [
+	"public/js/custom_customer_quick_entry.js"
+    ]
+}
