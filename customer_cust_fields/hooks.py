@@ -79,19 +79,13 @@ app_include_js = "/assets/js/customer.min.js"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
-
 doc_events = {
 	"Customer": {
-		"validate": "customer_cust_fields.customer_fields.custom_customer.update_contact"
+		"after_insert": "customer_cust_fields.customer_fields.custom_customer.qwupdate"
 	}
 }
+
+
 
 
 # Scheduled Tasks

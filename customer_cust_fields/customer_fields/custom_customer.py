@@ -1,7 +1,7 @@
-# Copyright (c) 2015, Frappe Technologies Pvt. Ltd. and Contributors
-# License: GNU General Public License v3. See license.txt
+# -*- coding: utf-8 -*-
 
 from __future__ import unicode_literals
+from __future__ import division
 import frappe
 from frappe.model.naming import make_autoname
 from frappe import _, msgprint, throw
@@ -14,52 +14,40 @@ from frappe.contacts.address_and_contact import load_address_and_contact, delete
 from frappe.model.rename_doc import update_linked_doctypes
 import erpnext.selling.doctype.customer.customer
 
+def qwupdate(doc, method):
+	# print('asdasd')
+	tas = frappe.db.get_list("Dynamic Link", 
+		fields= ["parent"],
+		filters={"link_doctype": doc.doctype, "link_name": doc.name, "parenttype": "Address"})[0].parent
 
-@frappe.whitelist()
-def update_contact(doc, method):
-	is_primary_contact=1
+	if tas and (doc.get('gst_state_number') or doc.get('gst_state') or doc.get('gstin')):
+		frappe.db.set_value("Address", tas, 'gst_state_number', doc.get('gst_state_number'))
+		frappe.db.set_value("Address", tas, 'gst_state', doc.get('gst_state'))
+		frappe.db.set_value("Address", tas, 'gstin', doc.get('gstin'))
+		print(doc.get('gst_state_number'))
+	# 	if doc.gst_state_number or doc.gst_state or doc.gstin:
+	# 		frappe.db.set_value("Address", tas, 'gst_state_number', doc.gst_state_number)
+	# 		frappe.db.set_value("Address", tas, 'gst_state', doc.gst_state)
+	# 		frappe.db.set_value("Address", tas, 'gstin', doc.gstin)
+	# 	print(tas)
 
-	# if not doc.mobile_no and not doc.email_id:
-	# 	contact = frappe.get_doc({
-	# 		'doctype': 'Contact',
-	# 		'first_name': doc.name,
-	# 		'mobile_no': doc.mobile_no,
-	# 		'email_id': doc.email_id,
-	# 		'dob': doc.date_of_birth,
-	# 		'doa': doc.date_of_anniversary,
-	# 		'is_primary_contact': is_primary_contact,
+	# if doc.flags.is_new_doc and doc.get('address_line1'):
+	# 	address = frappe.get_doc({
+	# 		'doctype': 'Address',
+	# 		'gst_state_number': doc.get('gst_state_number'),
+	# 		'gst_state': doc.get('gst_state'),
+	# 		'gstin': doc.get('gstin'),
+	# 		'address_title': doc.get('name'),
+	# 		'address_line1': doc.get('address_line1'),
+	# 		'address_line2': doc.get('address_line2'),
+	# 		'city': doc.get('city'),
+	# 		'state': doc.get('state'),
+	# 		'pincode': doc.get('pincode'),
+	# 		'country': doc.get('country'),
 	# 		'links': [{
-	# 			'link_doctype': doc.doctype,
-	# 			'link_name': doc.name
+	# 			'link_doctype': doc.get('doctype'),
+	# 			'link_name': doc.get('name')
 	# 		}]
 	# 	}).insert()
-	# 	# frappe.db.set_value("Customer", doc.name, 'customer_primary_contact', contact.name)
-	# 	doc.db_set('customer_primary_contact', contact.name)
-	# 	doc.save()
 
-	# if doc.mobile_no or doc.email_id:	
-		# frappe.db.set_value("Contact", doc.customer_primary_contact, 'dob', doc.date_of_birth)
-		# frappe.db.set_value("Contact", doc.customer_primary_contact, 'doa', doc.date_of_anniversary)
-		# doc.save()
-	# print(doc.date_of_birth)
-
-
-		# if doc.gstin or doc.gst_state or doc.gst_state_number:
-
-			# address = frappe.get_doc({
-			# 	'doctype': 'Address',
-			# 	'address_title': doc.name,
-			# 	'address_line1': doc.address_line1,
-			# 	'address_line2': doc.address_line2,
-			# 	'city': doc.city,
-			# 	'state': doc.state,
-			# 	'pincode': doc.pincode,
-			# 	'country': doc.country,
-			# 	'gstin': doc.gstin,
-			# 	'gst_state': doc.gst_state,
-			# 	'gst_state_number': doc.gst_state_number,
-			# 	'links': [{
-			# 		'link_doctype': doc.doctype,
-			# 		'link_name': doc.name
-			# 	}]
-			# }).insert()
+	# 	return address		
