@@ -20,10 +20,10 @@ def qwupdate(doc, method):
 		fields= ["parent"],
 		filters={"link_doctype": doc.doctype, "link_name": doc.name, "parenttype": "Address"})
 
-	if tas[0].parent and (doc.get('gst_state_number') or doc.get('gst_state') or doc.get('gstin')):
-		frappe.db.set_value("Address", tas, 'gst_state_number', doc.get('gst_state_number'))
-		frappe.db.set_value("Address", tas, 'gst_state', doc.get('gst_state'))
-		frappe.db.set_value("Address", tas, 'gstin', doc.get('gstin'))
+	if tas and (doc.get('gst_state_number') or doc.get('gst_state') or doc.get('gstin')):
+		frappe.db.set_value("Address", tas[0].parent, 'gst_state_number', doc.get('gst_state_number'))
+		frappe.db.set_value("Address", tas[0].parent, 'gst_state', doc.get('gst_state'))
+		frappe.db.set_value("Address", tas[0].parent, 'gstin', doc.get('gstin'))
 		print(doc.get('gst_state_number'))
 	# 	if doc.gst_state_number or doc.gst_state or doc.gstin:
 	# 		frappe.db.set_value("Address", tas, 'gst_state_number', doc.gst_state_number)
