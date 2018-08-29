@@ -89,7 +89,7 @@ app_include_js = "/assets/js/customer.min.js"
 
 doc_events = {
 	"Customer": {
-		"on_update": "customer_cust_fields.customer_fields.custom_customer.update_contact"
+		"validate": "customer_cust_fields.customer_fields.custom_customer.update_contact"
 	}
 }
 

@@ -19,11 +19,12 @@ frappe.ui.form.CustomerQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
 		{
 			label: __("Email Id"),
 			fieldname: "email_id",
-			fieldtype: "Data"
+			fieldtype: "Data",
+			reqd: 1
 		},
 		{
 			label: __("Date of Birth"),
-			fieldname: "dob",
+			fieldname: "date_of_birth",
 			fieldtype: "Date"
 		},		
 		{
@@ -32,11 +33,12 @@ frappe.ui.form.CustomerQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
 		{
 			label: __("Mobile Number"),
 			fieldname: "mobile_no",
-			fieldtype: "Data"
+			fieldtype: "Data",
+			reqd: 1
 		},
 		{
 			label: __("Date of Anniversary"),
-			fieldname: "doa",
+			fieldname: "date_of_anniversary",
 			fieldtype: "Date"
 		},
 		{
@@ -58,6 +60,23 @@ frappe.ui.form.CustomerQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
 			label: __("ZIP Code"),
 			fieldname: "pincode",
 			fieldtype: "Data"
+		},
+		{
+			label: __("Party GSTIN"),
+			fieldname: "gstin",
+			fieldtype: "Data"
+		},
+		{
+			label: __("GST State"),
+			fieldname: "gst_state",
+			fieldtype: "Select",
+			options: ["Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", 
+			"Bihar", "Chandigarh","Chhattisgarh", "Dadra and Nagar Haveli", "Daman and Diu", "Delhi", 
+			"Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", "Jharkhand", "Karnataka",
+			"Kerala", "Lakshadweep Islands", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", 
+			"Mizoram", "Nagaland", "Odisha", "Other Territory", "Pondicherry", "Punjab", "Rajasthan", 
+			"Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"			
+			]
 		},
 		{
 			fieldtype: "Column Break"
@@ -83,6 +102,11 @@ frappe.ui.form.CustomerQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
 			fieldname: "customer_pos_id",
 			fieldtype: "Data",
 			hidden: 1
+		},
+		{
+			label: __("GST State Number"),
+			fieldname: "gst_state_number",
+			fieldtype: "Int"
 		}];
 
 		return variant_fields;
