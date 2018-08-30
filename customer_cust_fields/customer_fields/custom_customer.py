@@ -15,13 +15,12 @@ from frappe.model.rename_doc import update_linked_doctypes
 import erpnext.selling.doctype.customer.customer
 
 def qwupdate(doc, method):
-	# print('asdasd')
-
-	if doc.flags.is_new_doc and doc.get('address_line1'):
-		tas = frappe.db.get_list("Dynamic Link", 
-		fields= ["parent"],
-		filters={"link_doctype": doc.doctype, "link_name": doc.name, "parenttype": "Address"})
-		frappe.msgprint(tas)
+	pass
+	# if doc.get('address_line1'):
+	# 	tas = frappe.db.get_list("Dynamic Link", 
+	# 	fields= ["parent"],
+	# 	filters={"link_doctype": doc.doctype, "link_name": doc.name, "parenttype": "Address"})
+	# 	print(tas)
 		# if tas[0]:
 		# 	if doc.get('gst_state_number') or doc.get('gst_state') or doc.get('gstin'):
 		# 		frappe.db.set_value("Address", tas[0].parent, 'gst_state_number', doc.get('gst_state_number'))
