@@ -16,16 +16,18 @@ import erpnext.selling.doctype.customer.customer
 
 def qwupdate(doc, method):
 	# print('asdasd')
-	tas = frappe.db.get_list("Dynamic Link", 
+
+	if doc.flags.is_new_doc and doc.get('address_line1'):
+		tas = frappe.db.get_list("Dynamic Link", 
 		fields= ["parent"],
 		filters={"link_doctype": doc.doctype, "link_name": doc.name, "parenttype": "Address"})
 
-	if tas[0]:
-		if doc.get('gst_state_number') or doc.get('gst_state') or doc.get('gstin'):
-			frappe.db.set_value("Address", tas[0].parent, 'gst_state_number', doc.get('gst_state_number'))
-			frappe.db.set_value("Address", tas[0].parent, 'gst_state', doc.get('gst_state'))
-			frappe.db.set_value("Address", tas[0].parent, 'gstin', doc.get('gstin'))
-			print(doc.get('gst_state_number'))
+		if tas[0]:
+			if doc.get('gst_state_number') or doc.get('gst_state') or doc.get('gstin'):
+				frappe.db.set_value("Address", tas[0].parent, 'gst_state_number', doc.get('gst_state_number'))
+				frappe.db.set_value("Address", tas[0].parent, 'gst_state', doc.get('gst_state'))
+				frappe.db.set_value("Address", tas[0].parent, 'gstin', doc.get('gstin'))
+				print(doc.get('gst_state_number'))
 	# 	if doc.gst_state_number or doc.gst_state or doc.gstin:
 	# 		frappe.db.set_value("Address", tas, 'gst_state_number', doc.gst_state_number)
 	# 		frappe.db.set_value("Address", tas, 'gst_state', doc.gst_state)
