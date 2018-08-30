@@ -19,8 +19,7 @@ frappe.ui.form.CustomerQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
 		{
 			label: __("Email Id"),
 			fieldname: "email_id",
-			fieldtype: "Data",
-			reqd: 1
+			fieldtype: "Data"
 		},
 		{
 			label: __("Date of Birth"),
@@ -33,8 +32,7 @@ frappe.ui.form.CustomerQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
 		{
 			label: __("Mobile Number"),
 			fieldname: "mobile_no",
-			fieldtype: "Data",
-			reqd: 1
+			fieldtype: "Data"
 		},
 		{
 			label: __("Date of Anniversary"),
