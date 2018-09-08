@@ -82,18 +82,21 @@ frappe.ui.form.CustomerQuickEntryForm = frappe.ui.form.QuickEntryForm.extend({
 		{
 			label: __("City"),
 			fieldname: "city",
-			fieldtype: "Data"
+			fieldtype: "Data",
+			default: "Kolkata",
 		},
 		{
 			label: __("State"),
 			fieldname: "state",
-			fieldtype: "Data"
+			fieldtype: "Data",
+			default: "West Bengal"
 		},
 		{
 			label: __("Country"),
 			fieldname: "country",
 			fieldtype: "Link",
-			options: "Country"
+			options: "Country",
+			default: "India"
 		},
 		{
 			label: __("Customer POS Id"),
